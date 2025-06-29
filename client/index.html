@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button onclick="send('forward')">Forward</button>
+  <button onclick="send('backward')">Backward</button>
+  <p>Status: <span id="status">Disconnected</span></p>
+  <script>
+    const ws = new WebSocket('wss://your-railway-url');
+    ws.onopen = () => document.getElementById('status').textContent = 'Connected';
+    ws.onclose = () => document.getElementById('status').textContent = 'Disconnected';
+    function send(cmd) { if (ws.readyState === 1) ws.send(cmd); }
+  </script>
+</body>
+</html>
